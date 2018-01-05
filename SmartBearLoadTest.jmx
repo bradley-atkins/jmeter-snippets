@@ -11,135 +11,13 @@
       <stringProp name="TestPlan.user_define_classpath"></stringProp>
     </TestPlan>
     <hashTree>
-      <SetupThreadGroup guiclass="SetupThreadGroupGui" testclass="SetupThreadGroup" testname="setUp Run Time Directories" enabled="true">
-        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
-        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
-          <boolProp name="LoopController.continue_forever">false</boolProp>
-          <stringProp name="LoopController.loops">1</stringProp>
-        </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
-        <longProp name="ThreadGroup.start_time">1515076890000</longProp>
-        <longProp name="ThreadGroup.end_time">1515076890000</longProp>
-        <boolProp name="ThreadGroup.scheduler">false</boolProp>
-        <stringProp name="ThreadGroup.duration"></stringProp>
-        <stringProp name="ThreadGroup.delay"></stringProp>
-        <stringProp name="TestPlan.comments">Setup Thread group to create unique runtime directories</stringProp>
-      </SetupThreadGroup>
+      <TestFragmentController guiclass="TestFragmentControllerGui" testclass="TestFragmentController" testname="Setup via a Test Fragment" enabled="false">
+        <stringProp name="TestPlan.comments">Use a test fragment and include to pull in the setup thread group</stringProp>
+      </TestFragmentController>
       <hashTree>
-        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="Runtime Properties" enabled="true">
-          <collectionProp name="Arguments.arguments">
-            <elementProp name="base_dir" elementType="Argument">
-              <stringProp name="Argument.name">base_dir</stringProp>
-              <stringProp name="Argument.value">/Users/bradley.atkins/jmeter_run_dir</stringProp>
-              <stringProp name="Argument.desc">Base directory for run results</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="user_tag" elementType="Argument">
-              <stringProp name="Argument.name">user_tag</stringProp>
-              <stringProp name="Argument.value">jmeter_demo</stringProp>
-              <stringProp name="Argument.desc">Optional User tag. e.g. Jira ID for a test task</stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-            </elementProp>
-            <elementProp name="sys_tag" elementType="Argument">
-              <stringProp name="Argument.name">sys_tag</stringProp>
-              <stringProp name="Argument.value">${__time(ddMMyyyyhhmmss)} </stringProp>
-              <stringProp name="Argument.metadata">=</stringProp>
-              <stringProp name="Argument.desc">System tag is used to create unique runtime dir</stringProp>
-            </elementProp>
-          </collectionProp>
-          <stringProp name="TestPlan.comments">User defined runtime properties</stringProp>
-        </Arguments>
-        <hashTree/>
-        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="Compose Paths for Run Directories" enabled="true">
-          <stringProp name="TestPlan.comments">Read the Runtime Properties and use them to compose a path for the mkdir command</stringProp>
-          <stringProp name="BeanShellSampler.query">String run_dir = vars.get(&quot;base_dir&quot;) + &quot;/&quot; + vars.get(&quot;user_tag&quot;) + &quot;/&quot; + vars.get(&quot;sys_tag&quot;);
-vars.put(&quot;run_dir&quot;, run_dir);
-
-String results = run_dir + &quot;/results&quot;;
-vars.put(&quot;results_dir&quot;, results);
- 
-String logs = run_dir + &quot;/logs&quot;;
-vars.put(&quot;log_dir&quot;, logs);</stringProp>
-          <stringProp name="BeanShellSampler.filename"></stringProp>
-          <stringProp name="BeanShellSampler.parameters"></stringProp>
-          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
-        </BeanShellSampler>
-        <hashTree/>
-        <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="Create Runtime Base Directory" enabled="true">
-          <boolProp name="SystemSampler.checkReturnCode">true</boolProp>
-          <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
-          <stringProp name="SystemSampler.command">mkdir</stringProp>
-          <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">-p</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">${run_dir}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="SystemSampler.directory"></stringProp>
-          <stringProp name="TestPlan.comments">Create a unique runtime base directory for results etc </stringProp>
-        </SystemSampler>
-        <hashTree/>
-        <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="Create Results Directory" enabled="true">
-          <boolProp name="SystemSampler.checkReturnCode">true</boolProp>
-          <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
-          <stringProp name="SystemSampler.command">mkdir</stringProp>
-          <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">-p</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">${results_dir}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="SystemSampler.directory"></stringProp>
-          <stringProp name="TestPlan.comments">Create a unique runtime base directory for results etc </stringProp>
-        </SystemSampler>
-        <hashTree/>
-        <SystemSampler guiclass="SystemSamplerGui" testclass="SystemSampler" testname="Create Log Directory" enabled="true">
-          <boolProp name="SystemSampler.checkReturnCode">true</boolProp>
-          <stringProp name="SystemSampler.expectedReturnCode">0</stringProp>
-          <stringProp name="SystemSampler.command">mkdir</stringProp>
-          <elementProp name="SystemSampler.arguments" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments">
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">-p</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-              <elementProp name="" elementType="Argument">
-                <stringProp name="Argument.name"></stringProp>
-                <stringProp name="Argument.value">${log_dir}</stringProp>
-                <stringProp name="Argument.metadata">=</stringProp>
-              </elementProp>
-            </collectionProp>
-          </elementProp>
-          <elementProp name="SystemSampler.environment" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
-            <collectionProp name="Arguments.arguments"/>
-          </elementProp>
-          <stringProp name="SystemSampler.directory"></stringProp>
-          <stringProp name="TestPlan.comments">Create a unique runtime base directory for results etc </stringProp>
-        </SystemSampler>
+        <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Setup Thread Group" enabled="true">
+          <stringProp name="IncludeController.includepath">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/dependencies/SetupRuntimeDirectories.jmx</stringProp>
+        </IncludeController>
         <hashTree/>
       </hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Smart Bear Load Test Thread Group" enabled="true">
@@ -314,7 +192,7 @@ vars.put(&quot;log_dir&quot;, logs);</stringProp>
         </hashTree>
       </hashTree>
       <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set - Delays" enabled="true">
-        <stringProp name="TestPlan.comments">36 random values for driving the delay parameter</stringProp>
+        <stringProp name="TestPlan.comments">Random values for driving the delay parameter</stringProp>
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="filename">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/Resources/LoadDelays.csv</stringProp>
