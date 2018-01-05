@@ -51,9 +51,6 @@ mkdir -p "${LOG}"
 [[ -d "${LOG}" ]] || die "Failed to create log directory"
 
 # Run jmeter and pass in the file locations
-jmeter -n -t "${JMX}" -j "${LOG}/$(basename ${JMX}).log" -l "${RESULTS}/$(basename ${JMX}).jtl"
-
-
-
-
+TESTNAME=$(basename ${JMX})
+jmeter -n -t "${JMX}" -j "${LOG}/${TESTNAME%.*}.log" -l "${RESULTS}/${TESTNAME%.*}.jtl"
 
