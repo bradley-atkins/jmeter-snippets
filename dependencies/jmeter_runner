@@ -1,0 +1,59 @@
+#! /bin/bash
+
+RUN_ROOT="${HOME}/jmeter_run_dir"
+SYS_TAG=$(date +%Y%m%d%H%M%S)
+RUN_TAG="default"
+
+die()
+{
+	echo "ERROR: ${1}"
+	exit 1
+}
+
+usage()
+{
+	echo "Usage:	$0 [etj]"
+	echo "-e		Explain. List the run parameters and exit"
+	echo "-j		Path to jmx test file"
+	echo "-t		Tag. Test Tag for results directory. e.g. Jira ticket or other identifier"
+}
+
+while getopts "ej:t:" o 
+do
+	case "${o}" in
+		e)
+			echo "Run root = ${RUN_ROOT}"
+			echo "System tag = ${SYS_TAG}"
+			echo "Run tag = ${RUN_TAG}"
+			echo "Results Directory = ${RUN_ROOT}/${RUN_TAG}/${SYS_TAG}"
+			echo "Test file = ${JMX}"
+			;;
+		j)
+			JMX="${OPTARG}"
+			;;
+		t)
+			RUN_TAG="${OPTARG}"
+			;;
+		*)
+			usage
+			exit
+			;;
+	esac
+done
+shift $((OPTIND-1))
+
+# Make the run directories
+RESULTS="${RUN_ROOT}/${RUN_TAG}/${SYS_TAG}/results"
+LOG="${RUN_ROOT}/${RUN_TAG}/${SYS_TAG}/log"
+mkdir -p "${RESULTS}"
+mkdir -p "${LOG}"
+[[ -d "${RESULTS}" ]] || die "Failed to create results directory"
+[[ -d "${LOG}" ]] || die "Failed to create log directory"
+
+# Run jmeter and pass in the file locations
+jmeter -n -t "${JMX}" -j "${LOG}/$(basename ${JMX}).log" -l "${RESULTS}/$(basename ${JMX}).jtl"
+
+
+
+
+
