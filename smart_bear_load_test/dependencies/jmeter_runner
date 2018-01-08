@@ -1,5 +1,5 @@
 #! /bin/bash
-
+SCRIPT=$(basename $0)
 RUN_ROOT="${HOME}/jmeter_run_dir"
 SYS_TAG=$(date +%Y%m%d%H%M%S)
 RUN_TAG="default"
@@ -12,10 +12,10 @@ die()
 
 usage()
 {
-	echo "Usage:	$0 [etj]"
-	echo "-e		Explain. List the run parameters and exit"
-	echo "-j		Path to jmx test file"
-	echo "-t		Tag. Test Tag for results directory. e.g. Jira ticket or other identifier"
+	echo "Usage:	${SCRIPT} 	-[etj]"
+	echo "-e			Explain. List the run parameters and exit"
+	echo "-j			Path to jmx test file"
+	echo "-t			Tag. Test Tag for results directory. e.g. Jira ticket or other identifier"
 }
 
 while getopts "ej:t:" o 
@@ -27,6 +27,7 @@ do
 			echo "Run tag = ${RUN_TAG}"
 			echo "Results Directory = ${RUN_ROOT}/${RUN_TAG}/${SYS_TAG}"
 			echo "Test file = ${JMX}"
+			exit
 			;;
 		j)
 			JMX="${OPTARG}"
@@ -51,6 +52,7 @@ mkdir -p "${LOG}"
 [[ -d "${LOG}" ]] || die "Failed to create log directory"
 
 # Run jmeter and pass in the file locations
+[[ -z ${JMX} ]] && usage && exit
 TESTNAME=$(basename ${JMX})
 jmeter -n -t "${JMX}" -j "${LOG}/${TESTNAME%.*}.log" -l "${RESULTS}/${TESTNAME%.*}.jtl"
 
