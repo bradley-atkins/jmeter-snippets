@@ -18,8 +18,8 @@
           <boolProp name="LoopController.continue_forever">false</boolProp>
           <stringProp name="LoopController.loops">1</stringProp>
         </elementProp>
-        <stringProp name="ThreadGroup.num_threads">1</stringProp>
-        <stringProp name="ThreadGroup.ramp_time">2</stringProp>
+        <stringProp name="ThreadGroup.num_threads">10</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">10</stringProp>
         <longProp name="ThreadGroup.start_time">1515066275000</longProp>
         <longProp name="ThreadGroup.end_time">1515066275000</longProp>
         <boolProp name="ThreadGroup.scheduler">false</boolProp>
@@ -27,13 +27,8 @@
         <stringProp name="ThreadGroup.delay"></stringProp>
       </ThreadGroup>
       <hashTree>
-        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
-          <collectionProp name="CookieManager.cookies"/>
-          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
-        </CookieManager>
-        <hashTree/>
         <IncludeController guiclass="IncludeControllerGui" testclass="IncludeController" testname="Include Controller" enabled="true">
-          <stringProp name="IncludeController.includepath">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/dependencies/SmartBearTestAssertAllLoadUrls.jmx</stringProp>
+          <stringProp name="IncludeController.includepath">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/smart_bear_load_test/dependencies/SmartBearTestAssertAllLoadUrls.jmx</stringProp>
         </IncludeController>
         <hashTree/>
       </hashTree>
@@ -68,6 +63,11 @@
           <boolProp name="clearEachIteration">true</boolProp>
           <boolProp name="useExpires">false</boolProp>
         </CacheManager>
+        <hashTree/>
+        <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+          <collectionProp name="CookieManager.cookies"/>
+          <boolProp name="CookieManager.clearEachIteration">false</boolProp>
+        </CookieManager>
         <hashTree/>
         <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="HTTP Request Medium" enabled="true">
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
@@ -228,7 +228,7 @@
         <stringProp name="TestPlan.comments">Random values for driving the delay parameter</stringProp>
         <stringProp name="delimiter">,</stringProp>
         <stringProp name="fileEncoding"></stringProp>
-        <stringProp name="filename">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/Resources/LoadDelays.csv</stringProp>
+        <stringProp name="filename">/Users/bradley.atkins/Documents/Testing/Performance/JMeter/TestPlans/Tutorials/smart_bear_load_test/Resources/LoadDelays.csv</stringProp>
         <boolProp name="ignoreFirstLine">false</boolProp>
         <boolProp name="quotedData">false</boolProp>
         <boolProp name="recycle">true</boolProp>
